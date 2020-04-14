@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xml:base="https://dvagov.sharepoint.com/sites/sec4TEST/tss/vasi/_api/" 
+    xmlns="http://www.w3.org/2005/Atom" 
+    xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" 
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" 
+    xmlns:georss="http://www.georss.org/georss" 
+    xmlns:gml="http://www.opengis.net/gml">
+    <id>a60f7a87-0405-4899-86fa-74ac33e72ad7</id>
+    <title />
+    <updated>2020-03-18T19:35:40Z</updated>
+    <entry m:etag="&quot;1&quot;">
+        <id>ed7c023e-4422-4fa0-beb8-c377b1214df4</id>
+        <category term="SP.Data.VASI_x0020_ExtractListItem" scheme="http://schemas.microsoft.com/ado/2007/08/dataservices/scheme" />
+        <link rel="edit" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/FirstUniqueAncestorSecurableObject" type="application/atom+xml;type=entry" title="FirstUniqueAncestorSecurableObject" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/FirstUniqueAncestorSecurableObject" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/RoleAssignments" type="application/atom+xml;type=feed" title="RoleAssignments" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/RoleAssignments" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/AttachmentFiles" type="application/atom+xml;type=feed" title="AttachmentFiles" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/AttachmentFiles" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ContentType" type="application/atom+xml;type=entry" title="ContentType" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/ContentType" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/GetDlpPolicyTip" type="application/atom+xml;type=entry" title="GetDlpPolicyTip" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/GetDlpPolicyTip" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/FieldValuesAsHtml" type="application/atom+xml;type=entry" title="FieldValuesAsHtml" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/FieldValuesAsHtml" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/FieldValuesAsText" type="application/atom+xml;type=entry" title="FieldValuesAsText" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/FieldValuesAsText" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/FieldValuesForEdit" type="application/atom+xml;type=entry" title="FieldValuesForEdit" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/FieldValuesForEdit" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/File" type="application/atom+xml;type=entry" title="File" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/File" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Folder" type="application/atom+xml;type=entry" title="Folder" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/Folder" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/LikedByInformation" type="application/atom+xml;type=entry" title="LikedByInformation" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/LikedByInformation" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/ParentList" type="application/atom+xml;type=entry" title="ParentList" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/ParentList" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Properties" type="application/atom+xml;type=entry" title="Properties" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/Properties" />
+        <link rel="http://schemas.microsoft.com/ado/2007/08/dataservices/related/Versions" type="application/atom+xml;type=feed" title="Versions" href="Web/Lists(guid'b80dca82-384f-4bd7-8413-380c3d6ef690')/Items(1)/Versions" />
+        <title />
+        <updated>2020-03-18T19:35:40Z</updated>
+        <author>
+            <name />
+        </author>
+        <content type="application/xml">
+            <m:properties>
+                <d:FileSystemObjectType m:type="Edm.Int32">0</d:FileSystemObjectType>
+                <d:Id m:type="Edm.Int32">1</d:Id>
+                <d:ServerRedirectedEmbedUri m:null="true" />
+                <d:ServerRedirectedEmbedUrl></d:ServerRedirectedEmbedUrl>
+                <d:ContentTypeId>0x0100F90C7B72C69A9F40B3881CE227AEEFE4</d:ContentTypeId>
+                <d:Title>HRIS</d:Title>
+                <d:ComplianceAssetId m:null="true" />
+                <d:VASI_x0020_Id m:type="Edm.Double">1340</d:VASI_x0020_Id>
+                <d:System_x0020_Name>Human Resources Information System (HR Smart)</d:System_x0020_Name>
+                <d:Parent_x0020_Organization>HR&amp;S</d:Parent_x0020_Organization>
+                <d:Organization>Office of Human Resources Management</d:Organization>
+                <d:Product_x0020_Line>Human Capital Management</d:Product_x0020_Line>
+                <d:Product_x0020_Line_x0020_Portfol>Corporate Services</d:Product_x0020_Line_x0020_Portfol>
+                <d:System_x0020_Status>Production</d:System_x0020_Status>
+                <d:Transformation_x0020_Status>Target</d:Transformation_x0020_Status>
+                <d:System_x0020_Criticality>01-Premium</d:System_x0020_Criticality>
+                <d:System_x0020_Description>HR Smart is a Human Resources Information System (HRIS) Shared Service Center (SSC) solution chosen in accordance with the federally mandated eGov initiatives (OMB directive). It has replaced the capabilities of the HR portion of the legacy Personnel and Accounting Integrated Data (PAID) system and will provide additional capabilities in future releases. The HR Smart system supports personnel action processing, benefits management, compensation management, and manager self-service.  The system is a Software As A Solution (SAAS), it is hosted by International Business Machines (IBM).   Authority To Operate (ATO) was granted in April 2014 for a categorization of Federal Information Management Act (FISMA) at Moderate.  The system became operational in April 2015, then had undergone a change in its FISMA categorization to High.  The system was successfully transitioned to the business office, Human Resources Information Services (HRIS) for System Ownership, September 2016.</d:System_x0020_Description>
+                <d:System_x0020_Type>Support System</d:System_x0020_Type>
+                <d:Software_x0020_Type>COTS</d:Software_x0020_Type>
+                <d:Is_x0020_External_x0020_Facing_x>No</d:Is_x0020_External_x0020_Facing_x>
+                <d:Parent_x0020_System m:null="true" />
+                <d:System_x0020_Components>HR SMART Testing Web Site&lt;br&gt;HRSmart Sync Web App&lt;br&gt;HRSmart Web Site</d:System_x0020_Components>
+                <d:BRM_x0020_Capabilities>Conduct Financial Management&lt;br&gt;Conduct Human Capital Management</d:BRM_x0020_Capabilities>
+                <d:BRM_x0020_Functions>Administer Employee Performance Management&lt;br&gt;Conduct Payable Management&lt;br&gt;Manage Compensation and Benefits&lt;br&gt;Perform Talent Acquisition</d:BRM_x0020_Functions>
+                <d:BRM_x0020_Business_x0020_Functio>Administer Compensation Management&lt;br&gt;Administer Onboarding Program Design and Management&lt;br&gt;Conduct Employee Performance Management Cycle Administration&lt;br&gt;Conduct Employee Performance Management Data Capture, Transfer, and Reporting&lt;br&gt;Conduct Employee Performance Management Program Development&lt;br&gt;Conduct Employee Performance Management Program Evaluation&lt;br&gt;Conduct Employee Performance Management System Development&lt;br&gt;Develop Employment Offer&lt;br&gt;Manage Benefits Policy and Procedure&lt;br&gt;Manage New Hire In-processing&lt;br&gt;Manage Performance Appraisal System Certification for SES and SL/ST&lt;br&gt;Manage Work-life Program Administration&lt;br&gt;Manage Work-life Strategy and Policy&lt;br&gt;Onboard Employees&lt;br&gt;Perform Agency Benefits Administration&lt;br&gt;Perform Benefits Counseling and Communications&lt;br&gt;Perform Payment Confirmation&lt;br&gt;Perform Payment Disbursement&lt;br&gt;Perform Talent Acquisition Data Capture, Transfer and Reporting&lt;br&gt;Perform Talent Acquisition System Administration and Records Management&lt;br&gt;Provide Payment Reporting</d:BRM_x0020_Business_x0020_Functio>
+                <d:IT_x0020_Investment>Other Corporate IT Systems</d:IT_x0020_Investment>
+                <d:Projects>Human Resources (HR) Smart Phase 4&lt;br&gt;Human Resources (HR) Smart Phase 5&lt;br&gt;Human Resources Information System (HRIS) Shared Service Center (SSC) Phase 3</d:Projects>
+                <d:Accreditation_x0020_Boundaries>Human Resources Information System Shared Service Center (HRIS) Assessing</d:Accreditation_x0020_Boundaries>
+                <d:Information_x0020_System_x0020_O>Cline, Christopher; Cookson, Cory; Feiertag, Anita; Frankford, Bruce; Gracie, Bruce; Jones, Mary; Kish, Steven; Messaoudi, Amine; Montes-Perez, Mayra; Murphy, David; Ray, Elaine; RIVERA, EDGARDO; Sharp, Tina; Sobrado, Lorraine; Sterns, Derek; Wood Jr, Charles</d:Information_x0020_System_x0020_O>
+                <d:Hosting_x0020_Locations>Carpathia - Ashburn, VA&lt;br&gt;QTS Hosting Inc Dulles&lt;br&gt;QTS Hosting Inc Phoenix</d:Hosting_x0020_Locations>
+                <d:Hosting_x0020_Model>Commercial Hosted</d:Hosting_x0020_Model>
+                <d:Technology_x0020_Components>7-Zip&lt;br&gt;Adobe Acrobat&lt;br&gt;Adobe Flash Player&lt;br&gt;AstroGrep&lt;br&gt;Beyond Compare&lt;br&gt;Citrix Receiver&lt;br&gt;Computer Associates (CA) Single Sign-On (SSO)&lt;br&gt;DB2&lt;br&gt;Firefox&lt;br&gt;Helios TextPad&lt;br&gt;IBM Installation Manager&lt;br&gt;IBM Sterling Connect&amp;#58;Direct&lt;br&gt;InfoSphere Information Server&lt;br&gt;International Business Machine (IBM) BigFix&lt;br&gt;International Business Machines (IBM) Security AppScan&lt;br&gt;JDK - Oracle Java Standard Edition (SE) Development Kit&lt;br&gt;Java SE&lt;br&gt;KeyStore Explorer&lt;br&gt;Microsoft .NET Framework&lt;br&gt;Microsoft Open Database Connectivity (ODBC) Driver for SQL Server&lt;br&gt;Microsoft Publisher&lt;br&gt;Microsoft Silverlight Plug-in&lt;br&gt;Microsoft Structured Query Language (SQL) Server&lt;br&gt;Microsoft Visual Studio&lt;br&gt;Microsoft Visual Studio Tools for Applications&lt;br&gt;Mortice Kern Systems (MKS) Toolkit&lt;br&gt;Nessus&lt;br&gt;Oracle PeopleSoft (SaaS)&lt;br&gt;Oracle Tuxedo&lt;br&gt;PostgreSQL&lt;br&gt;Rational Performance Tester (RPT)&lt;br&gt;Security Content Automation Protocol (SCAP) Compliance Checker&lt;br&gt;SoapUI&lt;br&gt;Spectrum Protect for Databases&lt;br&gt;Spectrum Protect for Workstations&lt;br&gt;SteelCentral Transaction Analyzer Plus&lt;br&gt;Symantec Endpoint Protection&lt;br&gt;TreeSize Professional&lt;br&gt;VMware vSphere Command-Line Interface (vCLI)&lt;br&gt;Visual C++ Redistributable Package&lt;br&gt;Websphere Application Server (WAS)&lt;br&gt;WhatsUp Gold&lt;br&gt;WinPcap&lt;br&gt;Windows Assessment and Deployment Kit (ADK)&lt;br&gt;Windows Client&lt;br&gt;Windows Secure Copy Protocol (WinSCP)&lt;br&gt;Windows Server</d:Technology_x0020_Components>
+                <d:OData__x0032_FA_x0020_Compliance xml:space="preserve">Compliant - </d:OData__x0032_FA_x0020_Compliance>
+                <d:VASI_x0020_Information_x0020_Own>Mark Ricciardi</d:VASI_x0020_Information_x0020_Own>
+                <d:Business_x0020_Sponsor>Roy Coles</d:Business_x0020_Sponsor>
+                <d:Project_x0020_Manager>Mark Ricciardi</d:Project_x0020_Manager>
+                <d:Data_x0020_Steward>Robin Parsons</d:Data_x0020_Steward>
+                <d:Technical_x0020_POC>Kyle Alverson&lt;br&gt;Stephanie Barbour</d:Technical_x0020_POC>
+                <d:Sustainment_x0020_Manager>Mark Ricciardi</d:Sustainment_x0020_Manager>
+                <d:Product_x0020_Line_x0020_Manager>Donald Sanders</d:Product_x0020_Line_x0020_Manager>
+                <d:System_x0020_Interfaces>ARMS[2311]&lt;br&gt;DCPS[EXTERNAL]&lt;br&gt;EHRIDW[EXTERNAL]&lt;br&gt;GRB[2219]&lt;br&gt;HR-PAS[2302]&lt;br&gt;MPDB[EXTERNAL]&lt;br&gt;MyPay[EXTERNAL]&lt;br&gt;PAID[1830]&lt;br&gt;PIV System[1511]&lt;br&gt;Prov[2345]&lt;br&gt;SSOi[2346]&lt;br&gt;VATAS[1677]&lt;br&gt;VHALWD[1863]&lt;br&gt;VistA[1973]&lt;br&gt;WC-OSH[1868]&lt;br&gt;e-Class[1197]&lt;br&gt;eCASE[2325]&lt;br&gt;eOPF[EXTERNAL]&lt;br&gt;ePerformance[2344]</d:System_x0020_Interfaces>
+                <d:ID m:type="Edm.Int32">1</d:ID>
+                <d:Modified m:type="Edm.DateTime">2020-03-18T18:51:19Z</d:Modified>
+                <d:Created m:type="Edm.DateTime">2020-03-18T18:51:19Z</d:Created>
+                <d:AuthorId m:type="Edm.Int32">37</d:AuthorId>
+                <d:EditorId m:type="Edm.Int32">37</d:EditorId>
+                <d:OData__UIVersionString>1.0</d:OData__UIVersionString>
+                <d:Attachments m:type="Edm.Boolean">false</d:Attachments>
+                <d:GUID m:type="Edm.Guid">d6beb36b-e493-4a1c-841e-b5a92f469e40</d:GUID>
+            </m:properties>
+        </content>
+    </entry>
+    <link rel="next" href="https://dvagov.sharepoint.com/sites/sec4TEST/tss/vasi/_api/web/lists/getbytitle('VASI%20Extract')/items?%24skiptoken=Paged%3dTRUE%26p_ID%3d1&amp;%24top=1" />
+</feed>

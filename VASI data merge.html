@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CODE.JSON</title>
+
+    <link href="https://kendo.cdn.telerik.com/2020.1.219/styles/kendo.common-material.min.css" rel="stylesheet" />
+    <link href="https://kendo.cdn.telerik.com/2020.1.219/styles/kendo.material.min.css" rel="stylesheet" />
+    <link href="https://kendo.cdn.telerik.com/2020.1.219/styles/kendo.material.mobile.min.css" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="https://kendo.cdn.telerik.com/2020.1.219/js/kendo.all.min.js"></script>
+
+    <style>
+        #s4-titlerow, #pageContentTitle, #titlerow {
+            display: none !important;
+        }
+
+        .contentwrapper {
+            margin: 0 !important;
+        }
+
+        .ms-pub-contentLayout {
+            padding: 0 !important;
+            margin-top: 0 !important;
+        }
+
+        .article-content {
+            margin: 0 !important;
+        }
+
+        .ms-core-listMenu-horizontalBox {
+            display: none !important;
+        }
+
+        div.article {
+            padding: 0px;
+        }
+
+        html, body {
+            height: 100% !important;
+            min-height: 100%;
+        }
+
+        .fill {
+            min-height: 100%;
+            height: 80vh;
+        }
+
+        .nav-item {
+            line-height: 500%;
+        }
+
+        h1 {
+            line-height: 200%
+        }
+
+        .nav-area {
+            background-color: #35373d;
+        }
+
+        .nav-area > ul > li {
+            color: #b8bbc2;
+            border-bottom: 1px solid #4a4b51;
+        }
+
+        .nav-area > ul > li:hover {
+            background-color: #212329;
+        }
+
+        .active {
+            background-color: #0d1016;
+        }
+
+        .k-edit-form-container {
+            width: 600px;
+        }
+
+        .k-edit-label {
+            width: 30%;
+            margin: 0;
+        }
+
+        .k-input, .k-combobox, .k-dropdown, .k-numerictextbox, .k-textbox {
+            width: 85% !important
+        }
+
+        .k-grid .k-grid-header .k-header .k-link { height: auto; }
+
+        .k-grid .k-grid-header .k-header { white-space: normal; }
+
+        .k-grid .k-header .k-grid-search { max-width: 20% !important }
+
+        .k-toolbar>* {
+            min-width: 10vw;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="message"></div>
+    <div id="kendoContent" style="width: 90vw; margin: auto;">
+        <div id="tabstrip">
+            <ul>
+                <li class="k-state-active">Appended Data</li>
+                <li>Pre-filtered VASI Data Extract</li>
+                <li>User Guide</li>
+            </ul>
+            <div class="mt-4">
+                <h2>Predefined filter applied to the VASI Data Extract</h2>
+                <div id="filter" style="min-width: 50vw;"></div>
+                <p>&nbsp;</p>
+                <div id="grid"></div>
+            </div>
+            <div>
+                <div id="extract" style="height: 650px;"></div>
+            </div>
+            <div>Redirecting you to the user guide...</div>
+        </div>
+        
+    </div>
+
+    <script>
+        (function (vaApp, $, undefined) {
+            $.model = new kendo.observable({
+                // Unique filter values
+                systemStatus: [],
+                softwareType: [],
+
+                // set the default digest value - required for post operations
+                digest: $('#__REQUESTDIGEST').val(),
+
+                // relative url
+                _siteUrl: _spPageContextInfo.webServerRelativeUrl,
+
+                // VASI Extract List
+                _spVasiExtractItem: "/_api/web/lists/getByTitle('VASI Extract')/items",
+                _spVasiExtractItemArgs: '?$top=5000',
+                vasiExtractListUrl: () => {
+                    return $.model._siteUrl + $.model._spVasiExtractItem + $.model._spVasiExtractItemArgs;
+                },
+
+                // VASI Append List
+                _spVasiAppendItem: "/_api/web/lists/getByTitle('VASI Append')/items",
+                _spVasiAppendItemArgs: '?$top=5000',
+                vasiAppendListUrl: () => {
+                    return $.model._siteUrl + $.model._spVasiAppendItem;
+                }
+
+            });
+
+            $.init = () => {
+                $.dsVasiAppend = new kendo.data.DataSource({
+                    transport: {
+                        read: function (options) {
+                            Lib.readData((response) => {
+                                response.map(dataItem => dataItem.Title = parseInt(dataItem.Title));
+                                options.success(response);
+                            }, $.model.vasiAppendListUrl() + $.model._spVasiAppendItemArgs );
+                        },
+                        create: function (options) {
+                            Lib.createData(function (response) {
+                                options.success(response);
+                            }, options, $.model.vasiAppendListUrl());
+                        },
+                        update: function (options) {
+                            Lib.updateData(options, $.model.vasiAppendListUrl());
+                            options.success();
+                        },
+                        destroy: function (options) {
+                            Lib.deleteData(options, $.model.vasiAppendListUrl());
+                            options.success();
+                        }
+                    },
+                    pageSize: 5,
+                    schema: {
+                        model: {
+                            id: 'Id',
+                            fields: {
+                                Title: { type: 'number' },
+                                organization: { type: 'string', defaultValue: 'OIT EPMO'},
+                                codeVersion: { type: 'string' },
+                                usageType: { type: 'string' },
+                                licenseName: { type: 'string' },
+                                opRL: { type: 'string' },
+                                homepageURL: { type: 'string' },
+                                downloadURL: { type: 'string' },
+                                disclaimerURL: { type: 'string' },
+                                repositoryURL: { type: 'string' },
+                                vcs: { type: 'string', defaultValue: 'GitHub' },
+                                laborHours: { type: 'number', defaultValue: 0 },
+                                tags: { type: 'string' },
+                                contactName: { type: 'string', defaultValue: 'EPMO Open Source Office' },
+                                contactEmail: { type: 'string', defaultValue: 'OSSOFT@va.gov' },
+                                Created: { type: 'date' },
+                                Modified: { type: 'date' },
+                                metadataLastUpdated: { type: 'date' }
+                            }
+                        }
+                    },
+                    error: function (e) {
+                        Utils.showMessage('SharePoint Online Error','We are experiencing a communication issue with SharePoint Online. See the JavaScript Console log for more details...');
+                        console.log(e);
+                    }
+                })
+
+                $.dsVasiExtract = new kendo.data.DataSource({
+                    transport: {
+                        read: function (options) {
+                            Lib.readData((response) => {
+                                // Rename object keys
+                                // https://stackoverflow.com/questions/50267076/es6-rename-keys-in-object-array
+                                //const test = response.map( ({
+                                //    System_x0020_Name,
+                                //    System_x0020_Description,
+                                //    System_x0020_Status
+                                //}) => ({ 
+                                //    name: System_x0020_Name,
+                                //    description: System_x0020_Description,
+                                //    status: System_x0020_Status
+                                //}) );
+                                //console.log(test);
+                                options.success(response);
+                            }, $.model.vasiExtractListUrl())
+                        },
+                        create: function (options) {
+                            options.success()
+                        },
+                        update: function (options) {
+                            options.success()
+                        },
+                        destroy: function (options) {
+                            options.success()
+                        }
+                    },
+                    sort: { field: 'VASI_x0020_Id', dir: 'asc' },
+                    error: function (e) {
+                        Utils.showMessage('SharePoint Online Error','We are experiencing a communication issue with SharePoint Online. See the JavaScript Console log for more details...');
+                        console.log(e);
+                    }
+                });
+                $.dsVasiExtract.fetch(() => {
+                    $.render();
+                });
+            }
+
+            $.render = () => {
+                // timeout alert set for 15 min
+                setTimeout(() => {
+                    Utils.showMessage('SharePoint Session Timeout','Your session has timed out. Any attempt to update information will result in an error. Please reload your web page to continue working.');
+                }, 900000);
+
+                $('#tabstrip').kendoTabStrip({
+                    contentUrls: [ null, null, null ],
+                    select: (e) => {
+                        if (e.item.textContent === 'User Guide') {
+                            e.preventDefault();
+                            $('#tabstrip').data('kendoTabStrip').select(0);
+                            window.open('../SitePages/Home.aspx');
+                        }
+                    }
+                });
+
+                // Filter editors
+                function onSystemStatusEdit (container, options) {
+                    $('<input data-bind="value: value" name="' + options.field + '"/>')
+                    .appendTo(container)
+                    .kendoDropDownList({
+                        dataSource: [...new Set($.dsVasiExtract.data().map(o => o.System_x0020_Status).filter(o => {return o !== null}))]
+                    });
+                };
+
+                function onSoftwareTypeEdit (container, options) {
+                    $('<input data-bind="value: value" name="' + options.field + '"/>')
+                    .appendTo(container)
+                    .kendoDropDownList({
+                        dataSource: [...new Set($.dsVasiExtract.data().map(o => o.Software_x0020_Type).filter(o => {return o !== null}))]
+                    });
+                };
+
+                $('#filter').kendoFilter({
+                    dataSource: $.dsVasiExtract,
+                    expressionPreview: false,
+                    applyButton: true,
+                    fields: [
+                        { name: 'System_x0020_Status', type: 'string', label: 'System Status', editorTemplate: onSystemStatusEdit },
+                        { name: 'Software_x0020_Type', type: 'string', label: 'Software Type', editorTemplate: onSoftwareTypeEdit }
+                    ],
+                    expression: {
+                        logic: 'and',
+                        filters: [
+                            { field: 'Software_x0020_Type', value: 'Custom Development', operator: 'eq' },
+                            { logic: 'or', filters: [
+                                { field: 'System_x0020_Status', value: 'Development', operator: 'eq' },
+                                { field: 'System_x0020_Status', value: 'Production', operator: 'eq' },
+                                { field: 'System_x0020_Status', value: 'Inactive', operator: 'eq' }
+                            ]}
+                        ]
+                    }
+                });
+                $('#filter').data('kendoFilter').applyFilter();
+
+                $('#grid').kendoGrid({
+                    dataSource: $.dsVasiAppend,
+
+                    // options
+                    columnMenu:  true,
+                    editable: 'popup',
+                    filterable: false,
+                    pageable: { pageSizes: true },
+                    reorderable: true,
+                    resizable: true,
+                    scrollable: { virtual: 'columns' },
+                    sortable: true,
+                    toolbar: [ 'create', { name: 'export', text: 'Download Code.JSON File', iconClass: 'k-icon k-i-download' }, 'search' ],
+
+                    columns: [
+                    { command: ['edit', 'destroy'], width: 225 },
+                        { field: 'Title', title: 'VASI ID', editor: Editors.vasiIdMultiColumn, template: function (dataItem) { return dataItem.Id !== '' ? dataItem.Title + '<br/>' + $.dsVasiExtract.view().find(e => e.VASI_x0020_Id === dataItem.Title).System_x0020_Name : dataItem.Title }, width: 300 },
+                        { field: 'codeVersion', title: 'Software Version', width: 150 },
+                        { field: 'tags', title: 'Tags', width: 150 },
+                        { field: 'laborHours', title: 'Labor Hours', width: 150 },
+                        { title: 'Permissions',
+                            columns: [
+                                { field: 'usageType', title: 'Usage Type', editor: Editors.usageTypeDropDownList, width: 200 },
+                                { field: 'licenseName', title: 'License', editor: Editors.licenseNameDropDownList, width: 200 },
+                                { field: 'opRL', title: 'License URL', width: 300 }
+                            ]
+                        },
+                        { title: 'Repository Information', 
+                            columns: [
+                                { field: 'vcs', title: 'Version Control System', width: 200 },
+                                { field: 'homepageURL', title: 'GitHub Homepage URL', width: 300 },
+                                { field: 'downloadURL', title: 'Download URL', width: 300 },
+                                { field: 'disclaimerURL', title: 'Disclaimer URL', width: 300 },
+                                { field: 'repositoryURL', title: 'Repository URL', width: 300 }
+                            ]
+                        },
+                        { title: 'Contact Information',
+                            columns: [
+                                { field: 'contactName', title: 'POC Name', width: 250 },
+                                { field: 'contactEmail', title: 'POC eMail', width: 250 }
+                            ]
+                        }/*,
+                        { title: 'Date Information',
+                            columns: [
+                                { field: 'Created', title: 'Create Date', width: 150, template: '#= kendo.toString(kendo.parseDate(Created), "M/d/yyyy") #' },
+                                { field: 'Modified', title: 'Modified Date', width: 150, template: '#= kendo.toString(kendo.parseDate(Modified), "M/d/yyyy") #' },
+                                { field: 'metadataLastUpdated', title: 'Metadata Date', width: 150, template: '#= kendo.toString(kendo.parseDate(Modified), "M/d/yyyy") #' },
+                            ]
+                        }*/
+                    ]
+                });
+
+                $('.k-grid-export').click(() => {
+                    var jsonResponse = new Object();
+                    jsonResponse['agency'] = 'VA';
+                    jsonResponse['version'] = '2.0.0';
+                    jsonResponse['measurementType'] = { method: 'modules' };
+                    jsonResponse['releases'] = [];
+
+                    $.each($.dsVasiExtract.view(), (index,value) => {
+                        let dataItem = $.dsVasiAppend.data().find(o => o.Title === value.VASI_x0020_Id);
+                        if (dataItem !== undefined) {
+                            jsonResponse.releases.push({
+                                name: value.System_x0020_Name,
+                                organization: 'OIT EPMO',
+                                version: dataItem.codeVersion,
+                                status: value.System_x0020_Status,
+                                permissions: { usageType: dataItem.usageType, licenses: [{ name: (dataItem.licenseName !== null) ? dataItem.licenseName : '', opRL: (dataItem.opRL !== null) ? dataItem.opRL : '' }]},
+                                homepageURL: (dataItem.homepageURL !== null) ? dataItem.homepageURL : '',
+                                downloadURL: (dataItem.downloadURL !== null) ? dataItem.downloadURL : '',
+                                disclaimerURL: (dataItem.disclaimerURL !== null) ? dataItem.disclaimerURL : '',
+                                repositoryURL: (dataItem.repositoryURL !== null) ? dataItem.repositoryURL : '',
+                                vcs: dataItem.vcs,
+                                laborHours: dataItem.laborHours,
+                                tags: [ (dataItem.tags !== null) ? dataItem.tags : '' ],
+                                languages: (value.Technology_x0020_Components !== null) ? value.Technology_x0020_Components : '',
+                                contact: { name: dataItem.contactName, email: dataItem.contactEmail },
+                                date: { created: dataItem.Created, lastModified: dataItem.Modified, metadataLastUpdated: dataItem.Modified }
+                            });
+                        } else {
+                            jsonResponse.releases.push({
+                                name: value.System_x0020_Name,
+                                organization: 'OIT EPMO',
+                                version: '',
+                                status: value.System_x0020_Status,
+                                permissions: { usageType: 'governmentWideReuse', licenses: [{ name: '', opRL: '' }]},
+                                homepageURL: '',
+                                downloadURL: '',
+                                disclaimerURL: '',
+                                repositoryURL: '',
+                                vcs: '',
+                                laborHours: 0,
+                                tags: [ '' ],
+                                languages: (value.Technology_x0020_Components !== null) ? value.Technology_x0020_Components : '',
+                                contact: { name: 'EPMO Open Source Office', email: 'OSSOFT@va.gov' },
+                                date: { created: value.Created, lastModified: value.Modified, metadataLastUpdated: value.Modified }
+                            });
+                        }
+                    })
+                    
+                    var a = document.createElement('a');
+                    var file = new Blob([JSON.stringify(jsonResponse)], {type: 'application/json'});
+                    a.href = URL.createObjectURL(file);
+                    a.download = 'code.JSON';
+                    a.click();
+                });
+
+                $('#extract').kendoGrid({
+                    dataSource: $.dsVasiExtract,
+
+                    // options
+                    pageable: { pageSizes: true },
+                    resizable: true,
+                    sortable: true,
+                    toolbar: [ 'search' ],
+
+                    columns: [
+                        { field: 'VASI_x0020_Id', title: 'VASI Id', width: 100 },
+                        { field: 'System_x0020_Name', title: 'System Name', width: 250 },
+                        { field: 'Software_x0020_Type', title: 'Software Type', width: 150 },
+                        { field: 'System_x0020_Status', title: 'System Status', width: 150 },
+                        { field: 'System_x0020_Description', title: 'Description' }
+                    ]
+                })
+            }
+
+            // internal Ajax CRUD functions
+            Lib = {
+                readData: function (callback,url) {
+                    $.ajax({
+                        url: url,
+                        dataType: 'json',
+                        type: 'GET',
+                        async: true,
+                        headers: {
+                            'Accept': 'application/json;odata=nometadata',
+                            'Content-Type': 'application/json;odata=nometadata'
+                        },
+                        success: function (data) {
+                            callback(data.value);
+                        },
+                        error: function (xhr) {
+                            callback(xhr);
+                        }
+                    })
+                },
+                createData: function (callback, args, url) {
+                    Utils.getDigest();
+                    delete args.data['Id'];
+                    $.ajax({
+                        url: url,
+                        method: 'POST',
+                        data: JSON.stringify(Utils.cleanseModel(args.data)),
+                        headers: {
+                            'Accept': 'application/json;odata=nometadata',
+                            'Content-Type': 'application/json;odata=nometadata',
+                            'X-RequestDigest': vaApp.model.digest,
+                            'X-HTTP-Method': 'POST'
+                        },
+                        success: function (data, status, xhr) {
+                            callback(data);
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr, status, error);
+                            args.error({});
+                        }
+                    });
+                },
+                updateData: function (args, url) {
+                    Utils.getDigest();
+                    $.ajax({
+                        url: url + '(' + args.data.Id + ')',
+                        method: 'PATCH',
+                        data: JSON.stringify(Utils.cleanseModel(args.data)),
+                        headers: {
+                            'Accept': 'application/json;odata=nometadata',
+                            'Content-Type': 'application/json;odata=nometadata',
+                            'X-RequestDigest': vaApp.model.digest,
+                            'IF-MATCH': '*',
+                            'X-HTTP-Method': 'PATCH'
+                        },
+                        success: function (data, status, xhr) {
+                            args.success({});
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr, status, error);
+                            args.error({});
+                        }
+                    });
+                },
+                deleteData: function (args, url) {
+                    Utils.getDigest();
+                    $.ajax({  
+                        url: url + '(' + args.data.Id + ')',
+                        method: "POST",  
+                        headers: {  
+                            'Accept': 'application/json;odata=nometadata',
+                            'Content-Type': 'application/json;odata=nometadata',
+                            'X-RequestDigest': vaApp.model.digest,
+                            'IF-MATCH': '*',
+                            'X-HTTP-Method': 'DELETE'
+                        },  
+                        success: function (data, status, xhr) {
+                            args.success({});
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr, status, error);
+                            args.error({});
+                        }
+                    });
+                }
+            }
+
+            // internal utility functions
+            Utils = {
+                showMessage: (title, message) => {
+                    var displayMessage = $('#_message').data('kendoWindow');
+                    displayMessage.title(title);
+                    displayMessage.content(message);
+                    displayMessage.open();
+                },
+                getDigest: () => {
+                    $.ajax({
+                        url:  vaApp.model._siteUrl + '/_api/contextinfo',
+                        dataType: 'json',
+                        type: 'POST',
+                        async: true,
+                        headers: {
+                            'Accept': 'application/json;odata=verbose',
+                            'Content-Type': 'application/json;odata=verbose'
+                        },
+                        success: function (response) {
+                            vaApp.model.set('digest', response.d.GetContextWebInformation.FormDigestValue);
+                        },
+                        error: function (xhr) {
+                            Utils.showMessage('Error: Digest Request Failure','There was a communication error with SharePoint obtaining the request digest needed for POST operations. See the console log for more details...');
+                            console.log(xhr);
+                        }
+                    });
+                },
+                cleanseModel: (model) => {
+                    delete model['__kendo_devtools_id'];
+                    delete model['__metadata'];
+                    delete model['Created'];
+                    delete model['Modified'];
+                    delete model['metadataLastUpdated'];
+                    delete model['Editor'];
+                    delete model['value'];
+                    model['Title'] = model['Title'].toString();
+                    console.log(model);
+                    return model;
+                }
+            }
+
+            Editors = {
+                vasiIdMultiColumn: (container, options) => {
+                    $('<input required name="' + options.field + '"/>')
+                    .appendTo(container)
+                    .kendoMultiColumnComboBox({
+                        autoBind: true,
+                        dataTextField: "System_x0020_Name",
+                        dataValueField: "VASI_x0020_Id",
+                        dataSource: { data: $.dsVasiExtract.view() },
+                        columns: [
+                            { field: 'VASI_x0020_Id', title: 'VASI ID', width: 100 },
+                            { field: 'System_x0020_Name', title: 'System Name', width: 300 }
+                        ]
+                    });
+                },
+                usageTypeDropDownList: (container, options) => {
+                    $('<input required name="' + options.field + '"/>')
+                    .appendTo(container)
+                    .kendoDropDownList({
+                        dataSource: ['openSource','governmentWideReuse']
+                    });
+                },
+                licenseNameDropDownList: (container, options) => {
+                    $('<input name="' + options.field + '"/>')
+                    .appendTo(container)
+                    .kendoDropDownList({
+                        dataSource: [' ', 'Public Domain, CC0-1.0', 'Permissive', 'LGPL', 'Copyleft', 'Proprietary']
+                    });
+                }
+            };
+
+        } (window.vaApp = window.vaApp = window.$ || {}, jQuery));
+
+        // when document ready
+        $( () => {
+            $.init();
+        });
+    </script>    
+
+</body>
+</html>
