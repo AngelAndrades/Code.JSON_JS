@@ -182,7 +182,7 @@
                                 Title: { type: 'number' },
                                 organization: { type: 'string', defaultValue: 'OIT EPMO'},
                                 codeVersion: { type: 'string' },
-                                usageType: { type: 'string' },
+                                usageType: { type: 'string', defaultValue: 'governmentWideResuse' },
                                 licenseName: { type: 'string' },
                                 opRL: { type: 'string' },
                                 homepageURL: { type: 'string' },
@@ -192,7 +192,7 @@
                                 vcs: { type: 'string', defaultValue: 'GitHub' },
                                 laborHours: { type: 'number', defaultValue: 0 },
                                 tags: { type: 'string' },
-                                contactName: { type: 'string', defaultValue: 'EPMO Open Source Office' },
+                                contactName: { type: 'string', defaultValue: 'EPMO Code Sharing Services' },
                                 contactEmail: { type: 'string', defaultValue: 'OSSOFT@va.gov' },
                                 Created: { type: 'date' },
                                 Modified: { type: 'date' },
@@ -396,7 +396,7 @@
                                 laborHours: 0,
                                 tags: [ '' ],
                                 languages: (value.Technology_x0020_Components !== null) ? value.Technology_x0020_Components : '',
-                                contact: { name: 'EPMO Open Source Office', email: 'OSSOFT@va.gov' },
+                                contact: { name: 'EPMO Code Sharing Services', email: 'OSSOFT@va.gov' },
                                 date: { created: value.Created, lastModified: value.Modified, metadataLastUpdated: value.Modified }
                             });
                         }
